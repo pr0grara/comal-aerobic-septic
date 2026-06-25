@@ -1,0 +1,263 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ServiceAreaMap from '@components/ServiceAreaMap.astro';
+import FaqSection from '@components/FaqSection.astro';
+import FinalCta from '@components/FinalCta.astro';
+import QuoteForm from '@components/QuoteForm.astro';
+import CityLinks from '@components/CityLinks.astro';
+import { SITE, tel } from '@config/site';
+import { SERVICES, type Faq } from '@config/services';
+import { serviceUrl } from '../lib/urls';
+import { defaultHero } from '../lib/images';
+import { faqPage } from '../lib/schema';
+
+const title = `${SITE.region} Aerobic Septic Installation, Repair & Maintenance`;
+const description = `Aerobic septic service across ${SITE.region}: ATU installation, repairs, the state-required four-month maintenance, inspections, pumping, and emergencies. TCEQ-licensed local crew that knows Hill Country systems. Call ${SITE.phoneDisplay} for a fast quote.`;
+
+// Homepage FAQs (rendered + FAQ schema via FaqSection / faqPage).
+const homeFaqs: Faq[] = [
+  {
+    q: 'Why does my Comal County property need an aerobic system?',
+    a: 'The Texas Hill Country sits on shallow, rocky limestone and tight clay soils that do not absorb wastewater fast enough for a conventional drain field. An aerobic treatment unit (ATU) aerates and disinfects the effluent so it can be spray-distributed over a smaller area, which is what these soils can handle. For most lots around New Braunfels, Bulverde, and Canyon Lake, an aerobic system is the only design the county will permit.',
+  },
+  {
+    q: 'Is a maintenance contract really required by law in Texas?',
+    a: 'Yes. Texas requires every aerobic system to be under a maintenance contract with a licensed provider, with an inspection at least every four months for the life of the system, and Comal County can ask for proof. We hold the contract, run the inspections on schedule, and file the reports so you stay compliant.',
+  },
+  {
+    q: 'What aerobic septic work do you do?',
+    a: 'New system design and installation, repairs to aerators, dosing pumps, control panels, chlorinators, and spray heads, the state-required four-month maintenance inspections, drain field replacement, tank pumping, and inspections for home sales. We also handle emergency backups. One TCEQ-licensed crew covers the whole system across Comal County.',
+  },
+  {
+    q: 'Do aerobic systems still need to be pumped?',
+    a: 'Yes — this is a common misunderstanding. Aeration treats the liquid waste, but solids still accumulate in the trash tank and the treatment and pump chambers. If they are never removed they carry over to the spray field and clog it. We check sludge levels at maintenance visits and pump when the tank actually needs it.',
+  },
+  {
+    q: 'My aerobic alarm is going off — can you come the same day?',
+    a: 'Often, yes — especially for urgent problems like a backup or an alarm that will not reset, which usually means a failed air compressor, a dead dosing pump, or a stuck float. Cut back on water use, do not just unplug the buzzer, and call. Same-day service is often available — ask when you call.',
+  },
+  {
+    q: 'What areas do you cover?',
+    a: 'New Braunfels, Canyon Lake, Bulverde, Spring Branch, Garden Ridge, Sattler, Fischer, Startzville, Smithson Valley, Gruene, Canyon City, Bracken, and the surrounding Comal County and Hill Country communities. If you are not sure we reach you, call and ask — we likely do.',
+  },
+];
+
+const jsonLd = faqPage(homeFaqs) ?? [];
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <!-- 1. Simple bold headline — no background image, no subtext -->
+  <section class="lp-hero">
+    <div class="container">
+      <h1>Aerobic Septic Service in {SITE.region}</h1>
+    </div>
+  </section>
+
+  <!-- 2. Photo + quote form -->
+  <section class="section-sm">
+    <div class="container split">
+      <div class="lp-photo">
+        <Image
+          src={defaultHero}
+          alt={`Aerobic septic installation and repair in ${SITE.region}`}
+          widths={[480, 760, 1000]}
+          sizes="(max-width: 920px) 100vw, 560px"
+          fetchpriority="high"
+          loading="eager"
+        />
+      </div>
+      <QuoteForm source="home-hero" />
+    </div>
+  </section>
+
+  <!-- 3. Intro / About -->
+  <section class="section section-soft" id="about">
+    <div class="container prose">
+      <h2>Your Local Aerobic Septic Crew — Install, Repair &amp; Maintenance.</h2>
+      <p>
+        We’re a full-service aerobic septic company serving {SITE.region} and the surrounding Texas
+        Hill Country. A new system for a build with no city sewer, a backup that needs fixing today,
+        a spray field that’s ponding, an alarm that won’t reset, the four-month maintenance the state
+        requires, or an inspection before you buy or sell — we handle the whole aerobic system, and
+        we come to your property to do it.
+      </p>
+      <p>
+        Out here the rocky limestone and tight clay soils won’t take a conventional drain field, so
+        the county requires an aerobic treatment unit (ATU) that aerates, disinfects, and sprays
+        treated effluent over a designated area. Those systems have real moving parts — a compressor,
+        a pump, a chlorinator, floats, and spray heads — and Texas mandates a maintenance contract
+        with inspections every four months. Tell us where your system is and what it’s doing, and
+        we’ll give you a straight answer, a real price, and a TCEQ-licensed crew that keeps you
+        compliant.
+      </p>
+      <ul class="checklist">
+        <li>Aerobic system design &amp; installation</li>
+        <li>Repairs — aerators, pumps, controls, chlorinators &amp; spray heads</li>
+        <li>State-required four-month maintenance &amp; inspections</li>
+        <li>Drain field replacement, pumping &amp; home-sale inspections</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. What We Do — a section per service (alternating rows) -->
+  <section class="section section-soft" id="services">
+    <div class="container">
+      <div class="section-head">
+        <h2>What We Do</h2>
+        <p class="lead muted">
+          From a new aerobic install to a failing spray field, here’s what we handle for
+          {SITE.region} homeowners.
+        </p>
+      </div>
+
+      {SERVICES.map((s, i) => (
+        <div class:list={['srow', { reverse: i % 2 === 1 }]}>
+          <div class="srow-media">
+            <a href={serviceUrl(s)}>
+              <Image
+                src={s.image}
+                alt={s.imageAlt}
+                widths={[480, 720, 960]}
+                sizes="(max-width: 920px) 100vw, 500px"
+                loading="lazy"
+                style="border-radius:var(--radius);width:100%;"
+              />
+            </a>
+          </div>
+          <div class="srow-body">
+            {s.emergency && <span class="badge">Emergency</span>}
+            <h3><a href={serviceUrl(s)}>{s.name}</a></h3>
+            <p>{s.description}</p>
+            <p class="srow-actions">
+              <a class="btn btn-primary" href={serviceUrl(s)}>More on {s.short} →</a>
+              <a class="btn btn-call" href={tel()}>Call {SITE.phoneDisplay}</a>
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 4. Service Across Comal County (maps + coverage) -->
+  <ServiceAreaMap />
+
+  <!-- 5. Backing up or a soggy yard? — urgency -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Backing Up, Ponding, or an Alarm Going Off? Don’t Wait.</h2>
+        <p class="lead muted">
+          An aerobic system problem only gets worse — and more expensive — the longer it runs. A few
+          signs mean you should cut back on water and call today.
+        </p>
+      </div>
+      <div class="issue-grid">
+        <div class="card">
+          <h3>Backups mean stop using water</h3>
+          <p class="muted">
+            Sewage backing up into tubs, drains, or toilets means the system has nowhere to put the
+            water. Every flush and load of laundry makes it worse. We relieve the backup, find the
+            cause — often a failed compressor or dosing pump — and get your house draining again.
+          </p>
+        </div>
+        <div class="card">
+          <h3>A ponding spray field is a warning</h3>
+          <p class="muted">
+            Standing water, soggy ground, or a sewage odor in the spray area means the system isn’t
+            dispersing treated effluent the way it should. Often it’s a fixable upstream problem — a
+            tired aerator or clogged heads — not a dead field, but it needs a look before it worsens.
+          </p>
+        </div>
+        <div class="card">
+          <h3>An aerobic alarm can’t be ignored</h3>
+          <p class="muted">
+            That red light and buzzer usually means the air compressor failed, the dosing pump isn’t
+            keeping up, or a float is stuck. Don’t just unplug it — cut back on water and call before
+            it turns into a backup. Caught early, the alarm can save you the mess entirely.
+          </p>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:24px;">
+        <a class="btn btn-call btn-lg" href={tel()}>Call {SITE.phoneDisplay}</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 6. How It Works -->
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head">
+        <h2>How It Works</h2>
+        <p class="lead muted">Three steps, no runaround.</p>
+      </div>
+      <div class="issue-grid">
+        <div class="card">
+          <h3>1. Call or request a quote</h3>
+          <p class="muted">
+            Call {SITE.phoneDisplay} or send the quote form. Tell us where the property is and what’s
+            going on and we’ll give you a straight price and a real time.
+          </p>
+        </div>
+        <div class="card">
+          <h3>2. Tell us about your system</h3>
+          <p class="muted">
+            Let us know roughly where the system is, what kind of aerobic unit it is if you know, and
+            the situation — a new install, the four-month maintenance, a backup, a ponding spray
+            field, an alarm, or an inspection. That’s usually enough for an honest quote.
+          </p>
+        </div>
+        <div class="card">
+          <h3>3. We come to your property</h3>
+          <p class="muted">
+            We locate and access the system, do the work on-site — most jobs in one visit — and show
+            you what we find before recommending anything. No upsells, no surprises.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Service area list -->
+  <CityLinks
+    title={`Service Area — Across ${SITE.region} & the Texas Hill Country`}
+    sub="Aerobic septic installation, repair, maintenance, and inspections for every community we cover."
+  />
+
+  <!-- 8. FAQ -->
+  <FaqSection faqs={homeFaqs} title="Questions We Hear a Lot" />
+
+  <!-- Final CTA -->
+  <FinalCta />
+</BaseLayout>
+
+<style>
+  .srow-body .badge {
+    display: inline-block;
+    background: #b42318;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+  }
+  .srow-body h3 {
+    font-size: 1.35rem;
+    margin-bottom: 8px;
+  }
+  .srow-body h3 a {
+    color: var(--navy);
+    text-decoration: none;
+  }
+  .srow-body h3 a:hover {
+    color: var(--green-dark);
+  }
+  .srow-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 4px;
+  }
+</style>
