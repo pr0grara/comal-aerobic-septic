@@ -37,9 +37,9 @@ export const SITE: SiteConfig = {
   trade: 'aerobic septic service',
   phone: '+18305550147', // PLACEHOLDER — Comal County / New Braunfels (830). Use the real number before launch.
   phoneDisplay: '(830) 555-0147', // PLACEHOLDER
-  email: 'service@comalaerobicseptic.com', // PLACEHOLDER local-part — confirm the real inbox
+  email: 'service@hillcountryaerobicseptic.com', // confirm the real inbox exists
   region: 'Comal County', // Texas Hill Country
-  url: 'https://comalaerobicseptic.com', // PLACEHOLDER domain — keep in sync with astro.config.mjs
+  url: 'https://hillcountryaerobicseptic.com', // live domain — keep in sync with astro.config.mjs
   // Call-only for now: empty endpoint disables form submission and shows an on-page
   // "we'll call you back" acknowledgement without sending anything. Wire a backend later
   // (Web3Forms endpoint+key, Formspree endpoint, or a Worker URL) — see SPEC §8.
