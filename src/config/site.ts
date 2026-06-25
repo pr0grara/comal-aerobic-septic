@@ -32,7 +32,7 @@ export interface SiteConfig {
 }
 
 export const SITE: SiteConfig = {
-  company: 'Comal Aerobic Septic', // PLACEHOLDER company name — swap for the real licensed business
+  company: 'Hill Country Aerobic Septic', // brand matches domain hillcountryaerobicseptic.com
   tagline: 'Aerobic Septic Installation, Repair & Maintenance',
   trade: 'aerobic septic service',
   phone: '+18305550147', // PLACEHOLDER — Comal County / New Braunfels (830). Use the real number before launch.
