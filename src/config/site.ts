@@ -10,7 +10,7 @@
 export interface SiteConfig {
   company: string;
   tagline: string;
-  /** What the business does, lowercase, for prose: "brake repair" */
+  /** What the business does, lowercase, for prose: "aerobic septic service" */
   trade: string;
   phone: string; // dialable, E.164
   phoneDisplay: string; // shown to visitors
