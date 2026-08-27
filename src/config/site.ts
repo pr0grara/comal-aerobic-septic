@@ -37,8 +37,8 @@ export const SITE: SiteConfig = {
   company: 'Hill Country Aerobic Septic', // brand matches domain hillcountryaerobicseptic.com
   tagline: 'Aerobic Septic Installation, Repair & Maintenance',
   trade: 'aerobic septic service',
-  phone: '+18305550147', // PLACEHOLDER — Comal County / New Braunfels (830). Use the real number before launch.
-  phoneDisplay: '(830) 555-0147', // PLACEHOLDER
+  phone: '+18305005209', // LIVE tracking number — New Braunfels 830 local (Twilio leadgen acct, 2026-08-25). Routes via lead-gen-twilio /incoming → whisper+voicemail → logs to calls table as "Hill Country Aerobic Septic".
+  phoneDisplay: '(830) 500-5209',
   email: 'service@hillcountryaerobicseptic.com', // confirm the real inbox exists
   region: 'Comal County', // Texas Hill Country
   url: 'https://hillcountryaerobicseptic.com', // live domain — keep in sync with astro.config.mjs
