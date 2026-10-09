@@ -1,6 +1,6 @@
 {
   "name": "comal-aerobic-septic",
-  "description": "Lead-gen site for Hill Country Aerobic Septic — aerobic septic installation, repair & maintenance across Comal County, Texas.",
+  "description": "Lead-gen site for Hill Country Aerobic Septic \u2014 aerobic septic installation, repair & maintenance across Comal County, Texas.",
   "type": "module",
   "version": "1.0.0",
   "private": true,
@@ -12,7 +12,8 @@
     "build": "astro build",
     "check": "astro check",
     "preview": "astro preview",
-    "deploy": "astro build && npx wrangler deploy"
+    "deploy": "astro build && npx wrangler deploy",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
